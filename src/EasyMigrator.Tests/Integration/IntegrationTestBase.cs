@@ -122,7 +122,11 @@ namespace EasyMigrator.Tests.Integration
         private void DeleteDatabase(DbConnection conn)
             => conn.ExecuteNonQuery($"IF EXISTS(select * from sys.databases where name='{DatabaseName}') DROP DATABASE [{DatabaseName}]");
 
-        protected DatabaseSchema GetDbSchema() => new DatabaseReader(ConnectionStringWithDatabase, SqlType.SqlServer).ReadAll();
+        protected DatabaseSchema GetDbSchema()
+        {
+            var connection = OpenConnection(ConnectionStringWithDatabase);
+            return new DatabaseReader(connection).ReadAll();
+        }
 
         private class IsSparseInfo
         {
@@ -137,7 +141,9 @@ namespace EasyMigrator.Tests.Integration
             var st = schema.Tables.Single(t => t.Name == table.Name);
 
             var isSparse = new Dictionary<string, bool>(st.Columns.Count, StringComparer.InvariantCultureIgnoreCase);
-            using (var db = new Database(ConnectionStringWithDatabase, DatabaseType.SqlServer2012)) {
+            
+            using (var connection = OpenConnection(ConnectionStringWithDatabase))
+            using (var db = new Database(connection, DatabaseType.SqlServer2012)) {
                 var sparseInfo = db.Fetch<IsSparseInfo>("SELECT Name, is_sparse AS IsSparse FROM sys.Columns WHERE object_id=object_id(@0)", tableName);
                 foreach (var o in sparseInfo)
                     isSparse.Add(o.Name, o.IsSparse);

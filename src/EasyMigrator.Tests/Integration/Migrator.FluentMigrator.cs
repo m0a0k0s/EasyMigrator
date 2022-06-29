@@ -58,7 +58,7 @@ namespace EasyMigrator.Tests.Integration.FluentMigrator
             var announcer = new TextWriterAnnouncer(s => Console.Out.WriteLine(s));
             var assembly = Assembly.GetExecutingAssembly();
             var migrationContext = new RunnerContext(announcer) { Namespace = GetType().Namespace, TransactionPerSession = true };
-            var options = new ProcessorOptions { PreviewOnly = false, Timeout = 60 };
+            var options = new ProcessorOptions { PreviewOnly = false, Timeout = TimeSpan.FromSeconds(60) };
             var factory = new SqlServer2012ProcessorFactory();
             var processor = factory.Create(connectionString, announcer, options);
             return new MigrationRunner(assembly, migrationContext, processor);

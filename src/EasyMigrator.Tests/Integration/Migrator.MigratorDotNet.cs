@@ -53,6 +53,9 @@ namespace EasyMigrator.Tests.Integration.MigratorDotNet
 
         private Assembly BuildMigrationAssembly(IList<MigrationActions> migrationActionsList)
         {
+            throw new NotImplementedException();
+            
+            /*
             var assemblyName = $"mdn_test_{Guid.NewGuid()}";
             var assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName(assemblyName), AssemblyBuilderAccess.RunAndSave);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyBuilder.GetName().Name, assemblyName + ".dll");
@@ -69,8 +72,10 @@ namespace EasyMigrator.Tests.Integration.MigratorDotNet
                 _migrationActions.Add(assemblyName, migrationActionsList);
 
             return assembly;
+            */
         }
 
+        /*
         static private void BuildMigrationClass(string assemblyName, ModuleBuilder moduleBuilder, int version)
         {
             var baseType = typeof(Migration);
@@ -92,7 +97,7 @@ namespace EasyMigrator.Tests.Integration.MigratorDotNet
             BuildMigrationMethod(assemblyName, typeBuilder, downBase, version);
 
             typeBuilder.CreateType();
-        }
+        }*/
 
         static private readonly MethodInfo _getMigrationActionsMethod = typeof(Migrator).GetMethod("GetMigrationAction");
         static private readonly MethodInfo _invokeMethod = typeof(Action<Migration>).GetMethod("Invoke");

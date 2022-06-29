@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using EasyMigrator.Parsing.Model;
@@ -13,6 +12,7 @@ using FluentMigrator.Builders.Create;
 using FluentMigrator.Builders.Create.Column;
 using FluentMigrator.Builders.Create.Table;
 using FluentMigrator.Runner.Extensions;
+using FluentMigrator.SqlServer;
 
 
 namespace EasyMigrator

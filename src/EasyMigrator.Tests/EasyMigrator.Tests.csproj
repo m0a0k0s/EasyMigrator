@@ -1,164 +1,42 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\packages\NUnit.3.13.2\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.13.2\build\NUnit.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{02CABC58-8268-4D10-9DED-64A0559C8848}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EasyMigrator.Tests</RootNamespace>
-    <AssemblyName>EasyMigrator.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DatabaseSchemaReader, Version=2.7.11.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DatabaseSchemaReader.2.7.11\lib\net40\DatabaseSchemaReader.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentMigrator, Version=1.6.2.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentMigrator.1.6.2\lib\40\FluentMigrator.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="FluentMigrator.Runner, Version=1.1.2.1, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentMigrator.1.6.2\tools\FluentMigrator.Runner.dll</HintPath>
     </Reference>
-    <Reference Include="Migrator">
-      <HintPath>..\packages\MigratorDotNet.0.9.1\lib\net35\Migrator.dll</HintPath>
-    </Reference>
-    <Reference Include="Migrator.Framework">
-      <HintPath>..\packages\MigratorDotNet.0.9.1\lib\net35\Migrator.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Migrator.Providers">
-      <HintPath>..\packages\MigratorDotNet.0.9.1\lib\net35\Migrator.Providers.dll</HintPath>
-    </Reference>
-    <Reference Include="NPoco, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPoco.4.0.3\lib\net40\NPoco.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.13.2.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.13.2\lib\net40\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
     <Reference Include="System.configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Caching" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AutoIncTests.cs" />
-    <Compile Include="ChangeColumnsTests.cs" />
-    <Compile Include="CreateIndexTests.cs" />
-    <Compile Include="DateTime2Tests.cs" />
-    <Compile Include="DateTimeOffsetTests.cs" />
-    <Compile Include="Integration\CompiledMigrations.cs" />
-    <Compile Include="Integration\MigrationSet.cs" />
-    <Compile Include="PopulateTests.cs" />
-    <Compile Include="PrecisionTests.cs" />
-    <Compile Include="ReflectionTests.cs" />
-    <Compile Include="ManyToManyTests.cs" />
-    <Compile Include="RemoveColumnsTests.cs" />
-    <Compile Include="Schemas\AddColumns.cs" />
-    <Compile Include="Schemas\AutoInc_Custom.cs" />
-    <Compile Include="Schemas\ChangeColumns.cs" />
-    <Compile Include="Schemas\DateTime2.cs" />
-    <Compile Include="Schemas\DateTimeOffset.cs" />
-    <Compile Include="Schemas\Fk_AddToExisting.cs" />
-    <Compile Include="Schemas\Fk_ByType_Guid.cs" />
-    <Compile Include="Schemas\Fk_ModifyExisting.cs" />
-    <Compile Include="Schemas\Fk_MultipleToSameTable.cs" />
-    <Compile Include="Schemas\Fk_Not_Indexed.cs" />
-    <Compile Include="Schemas\Mtm_BookAuthors.cs" />
-    <Compile Include="Schemas\Precisions.cs" />
-    <Compile Include="Schemas\RemoveColumns.cs" />
-    <Compile Include="Schemas\SelfReferential.cs" />
-    <Compile Include="Schemas\Sparse.cs" />
-    <Compile Include="Schemas\StringLengths.cs" />
-    <Compile Include="Schemas\Table1.cs" />
-    <Compile Include="Extensions\DbConnectionExtensions.cs" />
-    <Compile Include="Integration\IMigrator.cs" />
-    <Compile Include="Integration\MigrationActions.cs" />
-    <Compile Include="ForeignKeyTests.cs" />
-    <Compile Include="Integration\Migrator.FluentMigrator.cs" />
-    <Compile Include="Integration\Migrator.MigratorDotNet.cs" />
-    <Compile Include="SparseTests.cs" />
-    <Compile Include="StringLengthTests.cs" />
-    <Compile Include="Table1Test.cs" />
-    <Compile Include="TableTest\MigrationOrderAttribute.cs" />
-    <Compile Include="TableTest\TableTestCase.cs" />
-    <Compile Include="TableTest\TableTestData.cs" />
-    <Compile Include="Integration\IntegrationTestBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\AssertEx.cs" />
-    <Compile Include="ParseTests.cs" />
-    <Compile Include="TableTest\TableTestBase.cs" />
-    <Compile Include="TableTest\TableTestDatum.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <ProjectReference Include="..\EasyMigrator.Core\EasyMigrator.Core.csproj" />
+    <ProjectReference Include="..\EasyMigrator.FluentMigrator\EasyMigrator.FluentMigrator.csproj" />
+    <ProjectReference Include="..\EasyMigrator.MigratorDotNet\EasyMigrator.MigratorDotNet.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EasyMigrator.Core\EasyMigrator.Core.csproj">
-      <Project>{f2f56192-d287-4870-a902-cfb16425ce9e}</Project>
-      <Name>EasyMigrator.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EasyMigrator.FluentMigrator\EasyMigrator.FluentMigrator.csproj">
-      <Project>{fbaf094e-d2b0-4f01-a50d-ed1710c532e6}</Project>
-      <Name>EasyMigrator.FluentMigrator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EasyMigrator.MigratorDotNet\EasyMigrator.MigratorDotNet.csproj">
-      <Project>{77bf2540-6486-4f22-9aa3-2ae60a9fef74}</Project>
-      <Name>EasyMigrator.MigratorDotNet</Name>
-    </ProjectReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Runtime.Caching" Version="6.0.0" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="DatabaseSchemaReader" Version="2.7.11" />
+    <PackageReference Include="FluentMigrator" Version="3.3.2" />
+    <PackageReference Include="FluentMigrator.Tools" Version="3.3.2" />
+    <PackageReference Include="MigratorDotNet" Version="0.9.1" />
+    <PackageReference Include="NPoco" Version="4.0.3" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+  </ItemGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\NUnit.3.13.2\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.13.2\build\NUnit.props'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
