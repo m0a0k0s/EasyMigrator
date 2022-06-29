@@ -12,6 +12,10 @@
       <requireLicenseAcceptance>false</requireLicenseAcceptance>
       <dependencies>
         <dependency id="EasyMigrator.Core" version="$version$" />
+        <dependency id="FluentMigrator" version="3.3.2" />
+        <dependency id="FluentMigrator.Runner" version="3.3.2" />
+        <dependency id="Microsoft.CSharp" version="4.7.0" />
+        <dependency id="System.Data.DataSetExtensions" version="4.5.0" />
       </dependencies>
   </metadata>
 </package>

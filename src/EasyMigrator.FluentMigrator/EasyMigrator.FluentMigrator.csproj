@@ -6,6 +6,10 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Description>Fork of EasyMigrator</Description>
+    <Authors>m0a0k0s</Authors>
+    <PackageId>EasyMigrator.FluentMigrator.Fork</PackageId>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentMigrator.Runner, Version=1.1.2.1, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=x86">

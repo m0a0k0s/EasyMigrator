@@ -12,4 +12,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>This is the core library for EasyMigrator. If you want to use EasyMigrator with your migration framework, you probably want one of the integration packages like EasyMigrator.FluentMigrator.</summary>
     </metadata>
+    <dependency id="Microsoft.CSharp" version="4.7.0" />
+    <dependency id="System.Data.DataSetExtensions" version="4.5.0" />
+    <dependency id="System.Data.SqlClient" version="4.8.3" />
 </package>

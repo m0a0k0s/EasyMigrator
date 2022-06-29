@@ -5,6 +5,10 @@
     <OutputType>Library</OutputType>
     <RootNamespace>EasyMigrator</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageId>EasyMigrator.Core.Fork</PackageId>
+    <Authors>m0a0k0s</Authors>
+    <Description>Fork of EasyMigrator</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
