@@ -13,7 +13,7 @@ namespace EasyMigrator.Tests.Schemas
     {
         public class Poco
         {
-            [Pk, AutoInc(10, 3)] public byte Id;
+            [Pk, AutoInc(10, 3)] public byte Id { get; set; }
         }
 
         static Table Model = new Table {
@@ -33,7 +33,7 @@ namespace EasyMigrator.Tests.Schemas
     {
         public class Poco
         {
-            [Pk, AutoInc(10, 3)] public short Id;
+            [Pk, AutoInc(10, 3)] public short Id { get; set; }
         }
 
         static Table Model = new Table {
@@ -53,7 +53,7 @@ namespace EasyMigrator.Tests.Schemas
     {
         public class Poco
         {
-            [Pk, AutoInc(10, 3)] public int Id;
+            [Pk, AutoInc(10, 3)] public int Id { get; set; }
         }
 
         static Table Model = new Table {
@@ -73,7 +73,7 @@ namespace EasyMigrator.Tests.Schemas
     {
         public class Poco
         {
-            [Pk, AutoInc(10, 3)] public long Id;
+            [Pk, AutoInc(10, 3)] public long Id { get; set; }
         }
 
         static Table Model = new Table {

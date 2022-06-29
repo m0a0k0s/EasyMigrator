@@ -15,19 +15,19 @@ namespace EasyMigrator.Tests.Schemas
             [NPoco.TableName("Content")]
             public class Poco
             {
-                [Max] public string Title;
-                [Medium] public string ExternalId;
+                [Max] public string Title { get; set; }
+                [Medium] public string ExternalId { get; set; }
                 public DateTime DisplayStartDate;
-                [Default("GETUTCDATE()")] public DateTime? DisplayEndDate;
-                [Default("GETUTCDATE()")] public DateTime CreatedOn;
+                [Default("GETUTCDATE()")] public DateTime? DisplayEndDate { get; set; }
+                [Default("GETUTCDATE()")] public DateTime CreatedOn { get; set; }
             }
 
             [Name("Content")]
             public class ColumnsToChange
             {
-                [Precision(2), Default("GETUTCDATE()")] public DateTime DisplayStartDate;
-                [Precision(2)] public DateTime? DisplayEndDate;
-                [Precision(2), Default("GETUTCDATE()")] public DateTime CreatedOn;
+                [Precision(2), Default("GETUTCDATE()")] public DateTime DisplayStartDate { get; set; }
+                [Precision(2)] public DateTime? DisplayEndDate { get; set; }
+                [Precision(2), Default("GETUTCDATE()")] public DateTime CreatedOn { get; set; }
             }
 
             [Name("Content")]

@@ -58,7 +58,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Length(Length.Default)] public string Name;
+                [Length(Length.Default)] public string Name { get; set; }
             }
 
             static Table Model = new Table {
@@ -92,7 +92,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Default))]
                     public class Poco
                     {
-                        [Length(Length.Default)] public string Name;
+                        [Length(Length.Default)] public string Name { get; set; }
                     }
                 }
             }
@@ -102,7 +102,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Length(Length.Short)] public string Name;
+                [Length(Length.Short)] public string Name { get; set; }
             }
 
             static Table Model = new Table {
@@ -136,7 +136,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Short))]
                     public class Poco
                     {
-                        [Length(Length.Short)] public string Name;
+                        [Length(Length.Short)] public string Name { get; set; }
                     }
                 }
             }
@@ -146,7 +146,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Length(Length.Medium)] public string Name;
+                [Length(Length.Medium)] public string Name { get; set; }
             }
 
             static Table Model = new Table {
@@ -180,7 +180,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Medium))]
                     public class Poco
                     {
-                        [Length(Length.Medium)] public string Name;
+                        [Length(Length.Medium)] public string Name { get; set; }
                     }
                 }
             }
@@ -190,7 +190,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Length(Length.Long)] public string Name;
+                [Length(Length.Long)] public string Name { get; set; }
             }
 
             static Table Model = new Table {
@@ -224,7 +224,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Long))]
                     public class Poco
                     {
-                        [Length(Length.Long)] public string Name;
+                        [Length(Length.Long)] public string Name { get; set; }
                     }
                 }
             }
@@ -234,7 +234,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Length(Length.Max)] public string Name;
+                [Length(Length.Max)] public string Name { get; set; }
             }
 
             static Table Model = new Table {
@@ -268,7 +268,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Max))]
                     public class Poco
                     {
-                        [Length(Length.Max)] public string Name;
+                        [Length(Length.Max)] public string Name { get; set; }
                     }
                 }
             }
@@ -278,7 +278,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Length(500)] public string Name;
+                [Length(500)] public string Name { get; set; }
             }
 
             static Table Model = new Table {
@@ -312,7 +312,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Custom_500))]
                     public class Poco
                     {
-                        [Length(500)] public string Name;
+                        [Length(500)] public string Name { get; set; }
                     }
                 }
             }
@@ -322,7 +322,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Fixed(20)] public string Name;
+                [Fixed(20)] public string Name { get; set; }
             }
 
             static Table Model = new Table {
@@ -356,7 +356,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Fixed_20))]
                     public class Poco
                     {
-                        [Fixed(20)] public string Name;
+                        [Fixed(20)] public string Name { get; set; }
                     }
                 }
             }
@@ -368,7 +368,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Ansi] public string Name;
+                    [Ansi] public string Name { get; set; }
                 }
 
                 static Table Model = new Table {
@@ -402,7 +402,7 @@ namespace EasyMigrator.Tests.Schemas
                         [Name(nameof(Unspecified))]
                         public class Poco
                         {
-                            [Ansi] public string Name;
+                            [Ansi] public string Name { get; set; }
                         }
                     }
                 }
@@ -412,7 +412,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Length(Length.Default), Ansi] public string Name;
+                    [Length(Length.Default), Ansi] public string Name { get; set; }
                 }
 
                 static Table Model = new Table {
@@ -446,7 +446,7 @@ namespace EasyMigrator.Tests.Schemas
                         [Name(nameof(Default))]
                         public class Poco
                         {
-                            [Length(Length.Default), Ansi] public string Name;
+                            [Length(Length.Default), Ansi] public string Name { get; set; }
                         }
                     }
                 }
@@ -456,7 +456,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Length(Length.Short), Ansi] public string Name;
+                    [Length(Length.Short), Ansi] public string Name { get; set; }
                 }
 
                 static Table Model = new Table {
@@ -490,7 +490,7 @@ namespace EasyMigrator.Tests.Schemas
                         [Name(nameof(Short))]
                         public class Poco
                         {
-                            [Length(Length.Short), Ansi] public string Name;
+                            [Length(Length.Short), Ansi] public string Name { get; set; }
                         }
                     }
                 }
@@ -500,7 +500,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Length(Length.Medium), Ansi] public string Name;
+                    [Length(Length.Medium), Ansi] public string Name { get; set; }
                 }
 
                 static Table Model = new Table {
@@ -534,7 +534,7 @@ namespace EasyMigrator.Tests.Schemas
                         [Name(nameof(Medium))]
                         public class Poco
                         {
-                            [Length(Length.Medium), Ansi] public string Name;
+                            [Length(Length.Medium), Ansi] public string Name { get; set; }
                         }
                     }
                 }
@@ -544,7 +544,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Length(Length.Long), Ansi] public string Name;
+                    [Length(Length.Long), Ansi] public string Name { get; set; }
                 }
 
                 static Table Model = new Table {
@@ -578,7 +578,7 @@ namespace EasyMigrator.Tests.Schemas
                         [Name(nameof(Long))]
                         public class Poco
                         {
-                            [Length(Length.Long), Ansi] public string Name;
+                            [Length(Length.Long), Ansi] public string Name { get; set; }
                         }
                     }
                 }
@@ -588,7 +588,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Length(Length.Max), Ansi] public string Name;
+                    [Length(Length.Max), Ansi] public string Name { get; set; }
                 }
 
                 static Table Model = new Table {
@@ -622,7 +622,7 @@ namespace EasyMigrator.Tests.Schemas
                         [Name(nameof(Max))]
                         public class Poco
                         {
-                            [Length(Length.Max), Ansi] public string Name;
+                            [Length(Length.Max), Ansi] public string Name { get; set; }
                         }
                     }
                 }
@@ -632,7 +632,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Length(500), Ansi] public string Name;
+                    [Length(500), Ansi] public string Name { get; set; }
                 }
 
                 static Table Model = new Table {
@@ -666,7 +666,7 @@ namespace EasyMigrator.Tests.Schemas
                         [Name(nameof(Custom_500))]
                         public class Poco
                         {
-                            [Length(500), Ansi] public string Name;
+                            [Length(500), Ansi] public string Name { get; set; }
                         }
                     }
                 }
@@ -676,7 +676,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Fixed(20), Ansi] public string Name;
+                    [Fixed(20), Ansi] public string Name { get; set; }
                 }
 
                 static Table Model = new Table {
@@ -710,7 +710,7 @@ namespace EasyMigrator.Tests.Schemas
                         [Name(nameof(Fixed_20))]
                         public class Poco
                         {
-                            [Fixed(20), Ansi] public string Name;
+                            [Fixed(20), Ansi] public string Name { get; set; }
                         }
                     }
                 }

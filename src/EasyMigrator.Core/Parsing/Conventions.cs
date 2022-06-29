@@ -11,7 +11,7 @@ namespace EasyMigrator.Parsing
     public partial class Conventions
     {
         public Func<Context, string> TableName { get; set; }
-        public Func<Context, FieldInfo, string> ColumnName { get; set; }
+        public Func<Context, PropertyInfo, string> ColumnName { get; set; }
         public Func<Context, IEnumerable<Column>> PrimaryKey { get; set; }
         public Func<Context, string> PrimaryKeyName { get; set; }
         public Func<string, string> PrimaryKeyNameByTableName { get; set; }

@@ -16,7 +16,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Pk] public Guid Id;
+                [Pk] public Guid Id { get; set; }
             }
 
             static Table Model = new Table {
@@ -36,8 +36,8 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Pk] public Guid Id;
-                [Fk(typeof(Master), OnDelete = Rule.None)] public Guid MasterId;
+                [Pk] public Guid Id { get; set; }
+                [Fk(typeof(Master), OnDelete = Rule.None)] public Guid MasterId { get; set; }
             }
 
             static Table Model = new Table {

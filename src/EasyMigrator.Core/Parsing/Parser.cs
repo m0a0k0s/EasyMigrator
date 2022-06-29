@@ -197,7 +197,7 @@ namespace EasyMigrator.Parsing
         static private readonly MethodInfo _getUnique = typeof(Index).GetProperty("Unique").GetGetMethod();
         static private readonly MethodInfo _getWhere = typeof(Index).GetProperty("Where").GetGetMethod();
         static private readonly MethodInfo _getWith = typeof(Index).GetProperty("With").GetGetMethod();
-        private IIndex BuildIndex(Context context, Table table, FieldInfo fi)
+        private IIndex BuildIndex(Context context, Table table, PropertyInfo fi)
         {
             IndexColumn[] columns = null;
             IndexColumn[] includes = null;
@@ -215,30 +215,30 @@ namespace EasyMigrator.Parsing
                 includes = ci.Includes;
             }
             else {
-                var idxTableType = fi.FieldType.GetGenericArguments().Single();
+                var idxTableType = fi.PropertyType.GetGenericArguments().Single();
                 var idxContext = idxTableType == context.ModelType ? context : ParseTableType(idxTableType); // if it is the same type, don't infinitely recurse
                 
-                var columnsProp = fi.FieldType.GetProperty("Columns");
+                var columnsProp = fi.PropertyType.GetProperty("Columns");
                 var columnsArray = columnsProp.GetGetMethod().Invoke(fv, null);
 
                 var colType = columnsProp.PropertyType.GetElementType();
                 var getColExpr = colType.GetProperty("ColumnExpression").GetGetMethod();
                 var getDirection = colType.GetProperty("Direction").GetGetMethod();
 
-                var includesProp = fi.FieldType.GetProperty("Includes");
+                var includesProp = fi.PropertyType.GetProperty("Includes");
                 var includesArray = includesProp.GetGetMethod().Invoke(fv, null);
 
                 var getExprField = _getExprField.MakeGenericMethod(idxTableType, typeof(object));
-                getName = fi.FieldType.GetProperty("Name").GetGetMethod();
-                getClustered = fi.FieldType.GetProperty("Clustered").GetGetMethod();
-                getUnique = fi.FieldType.GetProperty("Unique").GetGetMethod();
-                getWhere = fi.FieldType.GetProperty("Where").GetGetMethod();
-                getWith = fi.FieldType.GetProperty("With").GetGetMethod();
+                getName = fi.PropertyType.GetProperty("Name").GetGetMethod();
+                getClustered = fi.PropertyType.GetProperty("Clustered").GetGetMethod();
+                getUnique = fi.PropertyType.GetProperty("Unique").GetGetMethod();
+                getWhere = fi.PropertyType.GetProperty("Where").GetGetMethod();
+                getWith = fi.PropertyType.GetProperty("With").GetGetMethod();
 
                 var columnList = new List<IndexColumn>();
                 foreach (var c in columnsArray as IEnumerable) {
                     var columnExpression = getColExpr.Invoke(c, null);
-                    var columnFieldInfo = getExprField.Invoke(null, new[] { columnExpression }) as FieldInfo;
+                    var columnFieldInfo = getExprField.Invoke(null, new[] { columnExpression }) as PropertyInfo;
                     var direction = (SortOrder)getDirection.Invoke(c, null);
                     columnList.Add(new IndexColumn(idxContext.Columns[columnFieldInfo].Name, direction));
                 }
@@ -247,7 +247,7 @@ namespace EasyMigrator.Parsing
                 var includeList = new List<IndexColumn>();
                 foreach (var c in includesArray as IEnumerable) {
                     var columnExpression = getColExpr.Invoke(c, null);
-                    var columnFieldInfo = getExprField.Invoke(null, new[] { columnExpression }) as FieldInfo;
+                    var columnFieldInfo = getExprField.Invoke(null, new[] { columnExpression }) as PropertyInfo;
                     var direction = (SortOrder)getDirection.Invoke(c, null);
                     includeList.Add(new IndexColumn(idxContext.Columns[columnFieldInfo].Name, direction));
                 }
@@ -301,33 +301,33 @@ namespace EasyMigrator.Parsing
 
         #region Helpers
 
-        protected virtual IEnumerable<FieldInfo> GetColumnFields(Type type)
-            => type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+        protected virtual IEnumerable<PropertyInfo> GetColumnFields(Type type)
+            => type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                    .Where(fi => !IsCompositeIndexField(fi));
 
-        protected virtual IEnumerable<FieldInfo> GetCompositeIndexFields(Type type)
-            => type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+        protected virtual IEnumerable<PropertyInfo> GetCompositeIndexFields(Type type)
+            => type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                    .Where(IsCompositeIndexField);
 
-        protected virtual bool IsCompositeIndexField(FieldInfo fi)
-            => fi.FieldType == typeof(EasyMigrator.Index) ||
-              (fi.FieldType.IsGenericType && fi.FieldType.GetGenericTypeDefinition() == typeof(EasyMigrator.Index<>));
+        protected virtual bool IsCompositeIndexField(PropertyInfo fi)
+            => fi.PropertyType == typeof(EasyMigrator.Index) ||
+              (fi.PropertyType.IsGenericType && fi.PropertyType.GetGenericTypeDefinition() == typeof(EasyMigrator.Index<>));
 
-        protected virtual string GetDefaultValue(object model, FieldInfo field)
+        protected virtual string GetDefaultValue(object model, PropertyInfo field)
         {
             if (field.HasAttribute<DefaultAttribute>())
                 return field.GetAttribute<DefaultAttribute>().Expression;
 
             var val = field.GetValue(model);
-            if (field.FieldType == typeof(bool))
+            if (field.PropertyType == typeof(bool))
                 return val != null && (bool)val ? "1" : "0"; // special case - always set a default for bools
-            else if (val == null || (field.FieldType.IsValueType && val.Equals(Activator.CreateInstance(field.FieldType))))
+            else if (val == null || (field.PropertyType.IsValueType && val.Equals(Activator.CreateInstance(field.PropertyType))))
                 return null;
             else
                 return val.ToString();
         }
 
-        protected virtual int? GetLength(Context context, FieldInfo field, Column column)
+        protected virtual int? GetLength(Context context, PropertyInfo field, Column column)
         {
             var lengths = Conventions.ColumnLengths(context, column);
 
@@ -341,7 +341,7 @@ namespace EasyMigrator.Parsing
             return lengthAttr.Length;
         }
 
-        protected virtual IPrecision GetPrecision(Context context, FieldInfo field, Column column)
+        protected virtual IPrecision GetPrecision(Context context, PropertyInfo field, Column column)
         {
             var precisionAttr = field.GetAttribute<PrecisionAttribute>();
             if (precisionAttr == null)
@@ -358,9 +358,9 @@ namespace EasyMigrator.Parsing
             return new PrecisionAttribute(p, s);
         }
 
-        protected virtual bool IsNullable(FieldInfo field)
+        protected virtual bool IsNullable(PropertyInfo field)
 #pragma warning disable 618
-            => (field.FieldType.IsNullableType() || !field.FieldType.IsValueType || field.HasAttribute<NullAttribute>()) && !field.HasAttribute<NotNullAttribute>();
+            => (field.PropertyType.IsNullableType() || !field.PropertyType.IsValueType || field.HasAttribute<NullAttribute>()) && !field.HasAttribute<NotNullAttribute>();
 #pragma warning restore 618
 
         #endregion

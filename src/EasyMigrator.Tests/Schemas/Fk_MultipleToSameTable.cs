@@ -13,7 +13,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             class Poco
             {
-                [Medium] string Description;
+                [Medium] string Description { get; set; }
             }
 
             static Table Model = new Table {
@@ -40,9 +40,9 @@ namespace EasyMigrator.Tests.Schemas
         {
             class Poco
             {
-                [Fk("Stuff")] int StuffId;
-                [Fk("Stuff")] int AltStuffId;
-                [Fk("Stuff")] int Desc;
+                [Fk("Stuff")] int StuffId { get; set; }
+                [Fk("Stuff")] int AltStuffId { get; set; }
+                [Fk("Stuff")] int Desc { get; set; }
             }
 
             static Table Model = new Table {

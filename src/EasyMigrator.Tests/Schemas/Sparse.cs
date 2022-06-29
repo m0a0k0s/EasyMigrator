@@ -15,11 +15,11 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Pk] public long Id;
-                [Sparse] public int? RT000;
-                [Sparse] public int? RT001;
-                [Sparse] public int? RT002;
-                [Sparse] public int? RT003;
+                [Pk] public long Id { get; set; }
+                [Sparse] public int? RT000 { get; set; }
+                [Sparse] public int? RT001 { get; set; }
+                [Sparse] public int? RT002 { get; set; }
+                [Sparse] public int? RT003 { get; set; }
             }
 
 

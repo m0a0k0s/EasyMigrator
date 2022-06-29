@@ -9,8 +9,8 @@ namespace EasyMigrator.Extensions
 {
     static public class ReflectionExtensions
     {
-        static public FieldInfo GetExpressionField<TSource, TField>(this Expression<Func<TSource, TField>> fieldExpression)
-            => (fieldExpression.Body as MemberExpression ?? ((UnaryExpression)fieldExpression.Body).Operand as MemberExpression).Member as FieldInfo;
+        static public PropertyInfo GetExpressionField<TSource, TField>(this Expression<Func<TSource, TField>> fieldExpression)
+            => (fieldExpression.Body as MemberExpression ?? ((UnaryExpression)fieldExpression.Body).Operand as MemberExpression).Member as PropertyInfo;
 
         static public TAttr GetAttribute<TAttr>(this MemberInfo member) where TAttr : Attribute
         {

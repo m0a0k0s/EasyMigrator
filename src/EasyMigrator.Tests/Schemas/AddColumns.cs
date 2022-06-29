@@ -22,8 +22,8 @@ namespace EasyMigrator.Tests.Schemas
             public class ColumnsToAdd
             {
                 public int Quantity;
-                [Max, NotNull] public string Story;
-                [Precision(Length.Short, 2)] decimal? Weight;
+                [Max, NotNull] public string Story { get; set; }
+                [Precision(Length.Short, 2)] private decimal? Weight { get; set; }
             }
 
             static Table Model = new Table {

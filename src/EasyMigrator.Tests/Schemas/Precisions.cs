@@ -57,7 +57,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Precision(Length.Default, 2)] public decimal Rate;
+                [Precision(Length.Default, 2)] public decimal Rate { get; set; }
                 public bool From;
             }
 
@@ -96,7 +96,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Default))]
                     public class Poco
                     {
-                        [Precision(Length.Default, 2)] public decimal Rate;
+                        [Precision(Length.Default, 2)] public decimal Rate { get; set; }
                         public bool From;
                     }
                 }
@@ -107,7 +107,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Precision(Length.Short, 2)] public decimal Rate;
+                [Precision(Length.Short, 2)] public decimal Rate { get; set; }
             }
 
             static Table Model = new Table {
@@ -140,7 +140,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Short))]
                     public class Poco
                     {
-                        [Precision(Length.Short, 2)] public decimal Rate;
+                        [Precision(Length.Short, 2)] public decimal Rate { get; set; }
                     }
                 }
             }
@@ -150,7 +150,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Precision(Length.Medium, 2)] public decimal Rate;
+                [Precision(Length.Medium, 2)] public decimal Rate { get; set; }
             }
 
             static Table Model = new Table {
@@ -183,7 +183,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Medium))]
                     public class Poco
                     {
-                        [Precision(Length.Medium, 2)] public decimal Rate;
+                        [Precision(Length.Medium, 2)] public decimal Rate { get; set; }
                     }
                 }
             }
@@ -193,7 +193,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Precision(Length.Long, 2)] public decimal Rate;
+                [Precision(Length.Long, 2)] public decimal Rate { get; set; }
             }
 
             static Table Model = new Table {
@@ -226,7 +226,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Long))]
                     public class Poco
                     {
-                        [Precision(Length.Long, 2)] public decimal Rate;
+                        [Precision(Length.Long, 2)] public decimal Rate { get; set; }
                     }
                 }
             }
@@ -236,7 +236,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Precision(Length.Max, 2)] public decimal Rate;
+                [Precision(Length.Max, 2)] public decimal Rate { get; set; }
             }
 
             static Table Model = new Table {
@@ -269,7 +269,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Max))]
                     public class Poco
                     {
-                        [Precision(Length.Max, 2)] public decimal Rate;
+                        [Precision(Length.Max, 2)] public decimal Rate { get; set; }
                     }
                 }
             }
@@ -279,7 +279,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Precision(13, 9)] public decimal Rate;
+                [Precision(13, 9)] public decimal Rate { get; set; }
                 public string From;
             }
 
@@ -319,7 +319,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(Custom_13_9))]
                     public class Poco
                     {
-                        [Precision(13, 9)] public decimal Rate;
+                        [Precision(13, 9)] public decimal Rate { get; set; }
                         public string From;
                     }
                 }

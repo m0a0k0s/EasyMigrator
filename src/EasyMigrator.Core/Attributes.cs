@@ -8,17 +8,17 @@ using System.Text;
 namespace EasyMigrator
 {
     [Obsolete("This attribute is for legacy code that is migrating. Use object types or nullable value types for a nullable field, and use NotNullAttribute to override object types for a non-nullable field")]
-    [AttributeUsage(AttributeTargets.Field)] public class NullAttribute : Attribute { }
-    [AttributeUsage(AttributeTargets.Field)] public class NotNullAttribute : Attribute { }
+    [AttributeUsage(AttributeTargets.Property)] public class NullAttribute : Attribute { }
+    [AttributeUsage(AttributeTargets.Property)] public class NotNullAttribute : Attribute { }
 
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
     public class NameAttribute : Attribute
     {
         public string Name { get; }
         public NameAttribute(string name) { Name = name; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class DbTypeAttribute : Attribute
     {
         public string CustomType { get; }
@@ -30,7 +30,7 @@ namespace EasyMigrator
     [AttributeUsage(AttributeTargets.Class)]
     public class NoPkAttribute : Attribute { }
 
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
     public class PkAttribute : Attribute
     {
         public string Name { get; }
@@ -40,7 +40,7 @@ namespace EasyMigrator
         public PkAttribute(string name) { Name = name; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class AutoIncAttribute : Attribute, Parsing.Model.IAutoIncrement
     {
         public long Seed { get; }
@@ -51,7 +51,7 @@ namespace EasyMigrator
         public AutoIncAttribute(long seed, long step) { Seed = seed; Step = step; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class PrecisionAttribute : Attribute, Parsing.Model.IPrecision
     {
         internal Length? DefinedPrecision { get; }
@@ -73,7 +73,7 @@ namespace EasyMigrator
         public PrecisionAttribute(Length precision) { DefinedPrecision = precision; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class FkAttribute : Attribute, Parsing.Model.IForeignKey
     {
         public string Name { get; set; }
@@ -129,7 +129,7 @@ namespace EasyMigrator
         public FkAttribute(Type tableType) { TableType = tableType; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class IndexAttribute : Attribute
     {
         public string Name { get; set; }
@@ -139,24 +139,24 @@ namespace EasyMigrator
         public string With { get; set; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class UniqueAttribute : IndexAttribute
     {
         public UniqueAttribute() { Unique = true; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class ClusteredAttribute : UniqueAttribute
     {
         public ClusteredAttribute() { Clustered = true; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class AnsiAttribute : Attribute { }
 
     public enum Length { Default, Short, Medium, Long, Max }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class LengthAttribute : Attribute
     {
         internal Length? DefinedLength { get; }
@@ -166,28 +166,28 @@ namespace EasyMigrator
         public LengthAttribute(Length length) { DefinedLength = length; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class ShortAttribute : LengthAttribute { public ShortAttribute() : base(EasyMigrator.Length.Short) { } }
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class MediumAttribute : LengthAttribute { public MediumAttribute() : base(EasyMigrator.Length.Medium) { } }
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class LongAttribute : LengthAttribute { public LongAttribute() : base(EasyMigrator.Length.Long) { } }
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class MaxAttribute : LengthAttribute { public MaxAttribute() : base(EasyMigrator.Length.Max) { } }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class FixedAttribute : LengthAttribute
     {
         public FixedAttribute(int length) : base(length) { }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class DefaultAttribute : Attribute
     {
         public string Expression { get; }
         public DefaultAttribute(string expression) { Expression = expression; }
     }
 
-    [AttributeUsage(AttributeTargets.Field)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class SparseAttribute : Attribute { }
 }

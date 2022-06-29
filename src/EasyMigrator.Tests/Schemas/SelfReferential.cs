@@ -16,7 +16,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Fk(typeof(Poco))] public int? ParentId;
+                [Fk(typeof(Poco))] public int? ParentId { get; set; }
             }
 
             static Table Model = new Table {
@@ -58,7 +58,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(ParentOfSelf))]
                     public class Poco
                     {
-                        [Fk(typeof(Poco))] public int? ParentId;
+                        [Fk(typeof(Poco))] public int? ParentId { get; set; }
                     }
                 }
             }

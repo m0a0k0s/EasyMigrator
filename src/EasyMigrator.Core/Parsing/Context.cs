@@ -13,8 +13,8 @@ namespace EasyMigrator.Parsing
         public Conventions Conventions { get; set; }
         public Table Table { get; set; }
         public Type ModelType { get; set; }
-        public IEnumerable<FieldInfo> ColumnFields { get; set; }
-        public IDictionary<FieldInfo, Column> Columns { get; set; } = new Dictionary<FieldInfo, Column>();
+        public IEnumerable<PropertyInfo> ColumnFields { get; set; }
+        public IDictionary<PropertyInfo, Column> Columns { get; set; } = new Dictionary<PropertyInfo, Column>();
         public object Model { get; set; }
     }
 }

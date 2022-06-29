@@ -13,20 +13,20 @@ namespace EasyMigrator.Tests.Schemas
         public class Poco
         {
             public int Sequence;
-            [Default("1")] public bool Accepted;
-            [NotNull] public string Name;
-            [Fixed(8), Ansi, NotNull, Unique(Name = "idx_code"), Default("'ABCD'")] public string Code;
-            [Length(Length.Medium)] public string Headline;
-            [Max] public string Desc;
-            [DbType(DbType.Currency)] public decimal? Rate;
-            [Precision(Length.Short, 3), Default("1")] public decimal Adjustment;
-            [Sparse, Fixed(16)] public byte[] IPv6;
-            [DbType("MONEY")] public double Cost;
-            [Default("GETDATE()")] public DateTime CreatedOn;
-            [Default("'2018-01-01'")] public DateTime ExpiresOn;
+            [Default("1")] public bool Accepted { get; set; }
+            [NotNull] public string Name { get; set; }
+            [Fixed(8), Ansi, NotNull, Unique(Name = "idx_code"), Default("'ABCD'")] public string Code { get; set; }
+            [Length(Length.Medium)] public string Headline { get; set; }
+            [Max] public string Desc { get; set; }
+            [DbType(DbType.Currency)] public decimal? Rate { get; set; }
+            [Precision(Length.Short, 3), Default("1")] public decimal Adjustment { get; set; }
+            [Sparse, Fixed(16)] public byte[] IPv6 { get; set; }
+            [DbType("MONEY")] public double Cost { get; set; }
+            [Default("GETDATE()")] public DateTime CreatedOn { get; set; }
+            [Default("'2018-01-01'")] public DateTime ExpiresOn { get; set; }
 
             Index<Poco> i1 = new Index<Poco>(x => x.Name, x => x.Code) { Unique = true, Where = $"{nameof(Name)} IS NOT NULL", With = "PAD_INDEX=ON" };
-            [Unique(With = "SORT_IN_TEMPDB=OFF")] Index<Poco> i2 = new Index<Poco>(new Descending<Poco>(x => x.Sequence), new Ascending<Poco>(x => x.Code)) { Name = "IX_Custom_Name" };
+            [Unique(With = "SORT_IN_TEMPDB=OFF")] Index<Poco> i2 { get; set; } = new Index<Poco>(new Descending<Poco>(x => x.Sequence), new Ascending<Poco>(x => x.Code)) { Name = "IX_Custom_Name" };
         }
 
         static Table Model = new Table {

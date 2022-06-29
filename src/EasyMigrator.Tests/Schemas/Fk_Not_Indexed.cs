@@ -36,7 +36,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Fk(typeof(Master), Indexed = false)] public int MasterId;
+                [Fk(typeof(Master), Indexed = false)] public int MasterId { get; set; }
             }
 
             static Table Model = new Table {

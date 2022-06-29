@@ -16,7 +16,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             class Poco
             {
-                [Medium] string Description;
+                [Medium] string Description { get; set; }
             }
 
             static Table Model = new Table {
@@ -43,7 +43,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             class Poco
             {
-                [Medium] string Description;
+                [Medium] string Description { get; set; }
             }
 
             static Table Model = new Table {
@@ -85,7 +85,7 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public class Poco
                 {
-                    [Fk("Select", OnDelete = Rule.Cascade, OnUpdate = Rule.Cascade)] public int SelectId;
+                    [Fk("Select", OnDelete = Rule.Cascade, OnUpdate = Rule.Cascade)] public int SelectId { get; set; }
                 }
             }
         }

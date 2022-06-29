@@ -14,7 +14,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [DbType(DbType.DateTimeOffset), Precision(3)] public DateTime CreatedOn;
+                [DbType(DbType.DateTimeOffset), Precision(3)] public DateTime CreatedOn { get; set; }
             }
 
             static Table Model = new Table {
@@ -47,7 +47,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(WithScale))]
                     public class Poco
                     {
-                        [DbType(DbType.DateTimeOffset), Precision(3)] public DateTime CreatedOn;
+                        [DbType(DbType.DateTimeOffset), Precision(3)] public DateTime CreatedOn { get; set; }
                     }
                 }
             }
@@ -57,7 +57,7 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [DbType(DbType.DateTimeOffset)] public DateTime CreatedOn;
+                [DbType(DbType.DateTimeOffset)] public DateTime CreatedOn { get; set; }
             }
 
             static Table Model = new Table {
@@ -90,7 +90,7 @@ namespace EasyMigrator.Tests.Schemas
                     [Name(nameof(NotNull))]
                     public class Poco
                     {
-                        [DbType(DbType.DateTimeOffset)] public DateTime CreatedOn;
+                        [DbType(DbType.DateTimeOffset)] public DateTime CreatedOn { get; set; }
                     }
                 }
             }

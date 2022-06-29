@@ -17,17 +17,17 @@ namespace EasyMigrator.Tests.Schemas
             {
                 public int? AccountId;
                 public DateTime CreateDate;
-                [Short] public string Category;
-                [Long] public string Link;
-                public int? RelatedObjectId;
-                [Short] public string Type;
-                [Medium] public string WhoPulsed;
+                [Short] public string Category { get; set; }
+                [Long] public string Link { get; set; }
+                public int? RelatedObjectId { get; set; }
+                [Short] public string Type { get; set; }
+                [Medium] public string WhoPulsed { get; set; }
             }
 
             [Name("Pulse")]
             public class ColumnsToRemove
             {
-                [Long] public string Link;
+                [Long] public string Link { get; set; }
                 //[Short] public string Type;
                 public DateTime CreateDate;
             }

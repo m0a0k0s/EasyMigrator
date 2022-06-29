@@ -16,8 +16,8 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Medium, NotNull] public string FirstName;
-                [Medium, NotNull] public string LastName;
+                [Medium, NotNull] public string FirstName { get; set; }
+                [Medium, NotNull] public string LastName { get; set; }
             }
 
             static public Table Model = new Table {
@@ -48,8 +48,8 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Medium, NotNull] public string Title;
-                [Short, NotNull] public string Isbn;
+                [Medium, NotNull] public string Title { get; set; }
+                [Short, NotNull] public string Isbn { get; set; }
             }
 
             static public Table Model = new Table
@@ -81,8 +81,8 @@ namespace EasyMigrator.Tests.Schemas
         {
             public class Poco
             {
-                [Pk, Fk(typeof(Book.Poco))] public int BookId;
-                [Pk, Fk(typeof(Author.Poco))] public int AuthorId;
+                [Pk, Fk(typeof(Book.Poco))] public int BookId { get; set; }
+                [Pk, Fk(typeof(Author.Poco))] public int AuthorId { get; set; }
             }
 
             static public Table Model = new Table

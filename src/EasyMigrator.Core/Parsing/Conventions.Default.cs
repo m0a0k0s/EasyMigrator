@@ -125,7 +125,7 @@ namespace EasyMigrator.Parsing
                         {typeof(XDocument), DbType.Xml},
                         {typeof(XmlDocument), DbType.Xml},
                     })
-                    .Add(new Dictionary<Type, Func<FieldInfo, DbType>> {
+                    .Add(new Dictionary<Type, Func<PropertyInfo, DbType>> {
                         { typeof(string),
                           f => f.HasAttribute<AnsiAttribute>()
                                ? (f.HasAttribute<FixedAttribute>() ? DbType.AnsiStringFixedLength : DbType.AnsiString)
