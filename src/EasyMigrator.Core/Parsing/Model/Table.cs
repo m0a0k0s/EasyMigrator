@@ -11,6 +11,7 @@ namespace EasyMigrator.Parsing.Model
     public class Table
     {
         public string Name { get; set; }
+        public string Schema { get; set; }
         public bool HasPrimaryKey => Columns.PrimaryKey().Any();
         public string PrimaryKeyName { get; set; }
         public bool PrimaryKeyIsClustered { get; set; } = true;

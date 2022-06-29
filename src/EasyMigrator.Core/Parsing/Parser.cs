@@ -77,7 +77,11 @@ namespace EasyMigrator.Parsing
                 ModelType = type,
                 Model = Activator.CreateInstance(type),
             };
-            context.Table = new Table { Name = type.GetAttribute<NameAttribute>()?.Name ?? Conventions.TableName(context) };
+            context.Table = new Table
+            {
+                Name = type.GetAttribute<NameAttribute>()?.Name ?? Conventions.TableName(context),
+                Schema = type.GetAttribute<SchemaAttribute>()?.Name ?? "public"
+            };
 
             return context;
         }

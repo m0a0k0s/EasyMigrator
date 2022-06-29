@@ -20,10 +20,10 @@ namespace EasyMigrator
             => new NamedCreateIndexOnColumnSyntax(Create, tableType);
 
         static public ICreateIndexOnColumnSyntax<TTable> OnTable<TTable>(this ICreateIndexForTableSyntax CreateIndex)
-            => new CreateIndexOnColumnSyntax<TTable>(CreateIndex.OnTable(typeof(TTable).ParseTable().Table.Name));
+            => new CreateIndexOnColumnSyntax<TTable>(CreateIndex.OnTable(typeof(TTable).ParseTable().Table.Name).InSchema(typeof(TTable).ParseTable().Table.Schema));
 
         static public ICreateIndexOnColumnSyntax OnTable(this ICreateIndexForTableSyntax CreateIndex, Type tableType)
-            => new CreateIndexOnColumnSyntax(CreateIndex.OnTable(tableType.ParseTable().Table.Name));
+            => new CreateIndexOnColumnSyntax(CreateIndex.OnTable(tableType.ParseTable().Table.Name).InSchema(tableType.ParseTable().Table.Schema));
 
         public interface ICreateIndexOptionsSyntax
         {
@@ -91,7 +91,7 @@ namespace EasyMigrator
                 var context = _tableType.ParseTable();
                 CreateIndexOnColumnSyntax = 
                     _create.Index(context.Conventions.IndexNameByTableAndColumnNames(context.Table.Name, columns.Select(c => c.ColumnName)))
-                           .OnTable(context.Table.Name);
+                           .OnTable(context.Table.Name).InSchema(context.Table.Schema);
                 return base.OnColumns(columns);
             }
         }
@@ -110,7 +110,7 @@ namespace EasyMigrator
                 var context = typeof(TTable).ParseTable();
                 CreateIndexOnColumnSyntax =
                     _create.Index(context.Conventions.IndexNameByTableAndColumnNames(context.Table.Name, columns.Select(c => c.ColumnName)))
-                           .OnTable(context.Table.Name);
+                           .OnTable(context.Table.Name).InSchema(context.Table.Schema);
                 return base.OnColumns(columns);
             }
         }

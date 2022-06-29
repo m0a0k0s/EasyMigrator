@@ -43,7 +43,7 @@ namespace EasyMigrator
                     continue;
 
                 if (f.Name != null)
-                    Delete.ForeignKey(f.Name).OnTable(table.Name);
+                    Delete.ForeignKey(f.Name).OnTable(table.Name).InSchema(table.Schema);
                 else
                     Delete.ForeignKey()
                           .FromTable(table.Name)
@@ -57,10 +57,10 @@ namespace EasyMigrator
         {
             foreach (var ci in table.Indices) {
                 if (ci.Name != null)
-                    Delete.Index(ci.Name).OnTable(table.Name);
+                    Delete.Index(ci.Name).OnTable(table.Name).InSchema(table.Schema);
                 else
                     Delete.Index()
-                          .OnTable(table.Name)
+                          .OnTable(table.Name).InSchema(table.Schema)
                           .OnColumns(ci.Columns.Select(c => c.ColumnName).ToArray());
             }
         }

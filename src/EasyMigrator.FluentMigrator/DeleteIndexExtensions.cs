@@ -23,7 +23,7 @@ namespace EasyMigrator
             => DeleteIndex.OnTable(typeof(TTable));
 
         static public void OnTable(this IDeleteIndexForTableSyntax DeleteIndex, Type tableType)
-            => DeleteIndex.OnTable(tableType.ParseTable().Table.Name);
+            => DeleteIndex.OnTable(tableType.ParseTable().Table.Name).InSchema(tableType.ParseTable().Table.Schema);
 
         public interface IDeleteIndexOnColumnSyntax
         {
@@ -55,7 +55,7 @@ namespace EasyMigrator
             {
                 var context = _tableType.ParseTable();
                 _create.Index(context.Conventions.IndexNameByTableAndColumnNames(context.Table.Name, columns.Select(c => c.ColumnName)))
-                        .OnTable(context.Table.Name);
+                        .OnTable(context.Table.Name).InSchema(context.Table.Schema);
             }
 
             public void OnColumns<TTable>(params Expression<Func<TTable, object>>[] columns)
@@ -83,7 +83,7 @@ namespace EasyMigrator
             {
                 var context = typeof(TTable).ParseTable();
                 _create.Index(context.Conventions.IndexNameByTableAndColumnNames(context.Table.Name, columns.Select(c => c.ColumnName)))
-                        .OnTable(context.Table.Name);
+                        .OnTable(context.Table.Name).InSchema(context.Table.Schema);
             }
 
             public void OnColumns(params Expression<Func<TTable, object>>[] columns)

@@ -23,7 +23,8 @@ namespace EasyMigrator
         static public void Table(this ICreateExpressionRoot Create, Type tableType)
         {
             var table = tableType.ParseTable().Table;
-            var createTableSyntax = Create.Table(table.Name);
+            var createTableSyntax = Create.Table(table.Name).InSchema(table.Schema);
+            
             foreach (var col in table.Columns)
                 createTableSyntax.WithColumn(col.Name)
                                  .BuildColumn<ICreateTableColumnAsTypeSyntax, 
@@ -31,7 +32,7 @@ namespace EasyMigrator
                                               ICreateTableColumnOptionOrForeignKeyCascadeOrWithColumnSyntax>(table, col);
 
             var pkCreator = Create.PrimaryKey(table.PrimaryKeyName)
-                                  .OnTable(table.Name)
+                                  .OnTable(table.Name).WithSchema(table.Schema)
                                   .Columns(table.Columns.PrimaryKey().Select(c => c.Name).ToArray());
 
             if (table.PrimaryKeyIsClustered)
@@ -70,10 +71,10 @@ namespace EasyMigrator
                     nonNullables.Add(col);
                 }
 
-                Create.Column(col.Name).OnTable(table.Name)
-                                 .BuildColumn<ICreateColumnAsTypeOrInSchemaSyntax,
-                                              ICreateColumnOptionSyntax,
-                                              ICreateColumnOptionOrForeignKeyCascadeSyntax>(table, col);
+                Create.Column(col.Name).OnTable(table.Name).InSchema(table.Schema)
+                    .BuildColumn<ICreateColumnAsTypeSyntax,
+                                    ICreateColumnOptionSyntax,
+                                    ICreateColumnOptionOrForeignKeyCascadeSyntax>(table, col);
             }
 
             foreach (var col in table.Columns.Where(c => c.ForeignKey != null))
@@ -107,8 +108,8 @@ namespace EasyMigrator
                 populate();
                 foreach (var col in nonNullables) {
                     col.IsNullable = false;
-                    Alter.Column(col.Name).OnTable(table.Name)
-                                     .BuildColumn<IAlterColumnAsTypeOrInSchemaSyntax,
+                    Alter.Column(col.Name).OnTable(table.Name).InSchema(table.Schema)
+                                     .BuildColumn<IAlterColumnAsTypeSyntax,
                                                   IAlterColumnOptionSyntax,
                                                   IAlterColumnOptionOrForeignKeyCascadeSyntax>(table, col);
                 }
