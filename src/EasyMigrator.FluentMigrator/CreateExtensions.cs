@@ -201,6 +201,7 @@ namespace EasyMigrator
                 case DbType.UInt64: return s.AsInt64();
                 //case DbType.VarNumeric: return s.AsByte();
                 case DbType.Xml: return col.Length.IfHasValue(s.AsXml, s.AsXml);
+                case (DbType)ExtraDbTypes.JsonType: return s.AsCustom("json");
                 default: throw new Exception("DbType '" + col.Type + "' is not mapped to a column type for FluentMigrator.");
             }
         }
