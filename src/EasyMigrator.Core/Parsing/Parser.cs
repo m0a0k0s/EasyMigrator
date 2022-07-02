@@ -307,7 +307,7 @@ namespace EasyMigrator.Parsing
 
         protected virtual IEnumerable<PropertyInfo> GetColumnFields(Type type)
             => type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                   .Where(fi => !IsCompositeIndexField(fi));
+                   .Where(fi => !IsCompositeIndexField(fi) && !IsIgnored(fi));
 
         protected virtual IEnumerable<PropertyInfo> GetCompositeIndexFields(Type type)
             => type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
@@ -316,6 +316,9 @@ namespace EasyMigrator.Parsing
         protected virtual bool IsCompositeIndexField(PropertyInfo fi)
             => fi.PropertyType == typeof(EasyMigrator.Index) ||
               (fi.PropertyType.IsGenericType && fi.PropertyType.GetGenericTypeDefinition() == typeof(EasyMigrator.Index<>));
+
+        protected virtual bool IsIgnored(PropertyInfo fi)
+            => fi.HasAttribute<IgnoreItemAttribute>();
 
         protected virtual string GetDefaultValue(object model, PropertyInfo field)
         {

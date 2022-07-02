@@ -197,4 +197,7 @@ namespace EasyMigrator
 
     [AttributeUsage(AttributeTargets.Property)]
     public class SparseAttribute : Attribute { }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class IgnoreItemAttribute : Attribute { }
 }
